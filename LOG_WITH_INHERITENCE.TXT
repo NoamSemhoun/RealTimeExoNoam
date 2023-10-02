@@ -1,0 +1,60 @@
+Start
+
+ *************   D Start    *********************
+DDDDD---- - > I am D and I WAIT to B
+
+ *************   C Start    *********************
+CCCCC---- - > I am C and I WAIT to A
+
+ *************   F Start    *********************
+FFFFF---- - > I am F and I WAIT to B
+
+ *************   E Start    *********************
+EEEEE---- - > I am E and I WAIT to A
+
+ *************   B Start    *********************
+BBBBB
+---- - > I am B and I acquire bMutex
+BBBBB
+---- - > I am B and I send to D 
+---- - > I am B and I send to F 
+---- - > I am B and I continue running after events
+---- - > I am D and B let me go
+---- - > I am D and and I wait to bMutex
+BBBBB
+---- - > I am B and I release bMutex
+---- - > I am B and bMutex was released
+---- - > I am D and B let me go
+DDDDD
+---- - > I'm D and I release bMutex!
+
+ *************   D Finish    *********************
+---- - > I am F and B let me go
+FFFFF
+ *************   F Finish    *********************
+BBBBB
+ *************   B finish    *********************
+
+ *************   A Start    *********************
+AAAAA
+---- - > I am A and I acquire aMutex
+AAAAA
+---- - > I am A and I send to C 
+---- - > I am A and I send to E 
+---- - > I am A and I continue running after events
+---- - > I am C and A let me go
+---- - > I am C and and I wait to aMutex
+AAAAA
+---- - > I am A and I release aMutex
+Amutex was released.
+---- - > I am C and I continue, acquired aMutex
+CCCCC---- - > C release Amutex
+---- - > I'm C and I release aMutex!
+
+ *************   C Finish    *********************
+---- - > I am E and A let me go
+EEEEE
+ *************   E Finish    *********************
+AAAAA
+ *************   A finish    *********************
+End
